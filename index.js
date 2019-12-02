@@ -12,7 +12,7 @@ $(function() {
 
     //remove items from shopping list
     $(document).on('click', '.shopping-item-delete', function() {
-      this.closest("li").remove();
+      $(this).closest("li").remove(); //Both jQuery and Javascript have closest() function. In this case, both this or $(this) work.
       //Find the parent "li" and remove it
     });
     
@@ -28,6 +28,7 @@ $(function() {
     //Check items
     $(document).on('click', '.shopping-item-toggle', function() {
       $(this).closest('li').find('.shopping-item').toggleClass('shopping-item__checked');
+
     });
 
   });
