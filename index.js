@@ -4,23 +4,31 @@ $(function() {
     event.preventDefault();
     
     const shoppingItem = $(event.currentTarget).find('input[name="shopping-list-entry"]').val();
-    // we'll store individual DOM elements for each number
-    // in this array, and once we've produced them all,
-    // we'll append it to the results section of our HTML
+    console.log(shoppingItem);
     
-    const results = [];
-    results.push(shoppingItem); //push item user created into an array
+    //add item in shopping list
+    $(".shopping-list").append(`<li><span class="shopping-item"> ${shoppingItem} </span><div class="shopping-item-controls"><button class="shopping-item-toggle"><span class="button-label">check</span></button><button class="shopping-item-delete"><span class="button-label">delete</span></button></div></li>`);
+    
 
-    const resultsElements = results.map(function(item) {
-      return '<li><span class="shopping-item>${item}</span><div class="shopping-item-controls"><button class="shopping-item-toggle"><span class="button-label">check</span></button><button class="shopping-item-delete"><span class="button-label">delete</span></button></div></li>'
+    //remove items from shopping list
+    $(document).on('click', '.shopping-item-delete', function() {
+      this.closest("li").remove();
+      //Find the parent "li" and remove it
     });
     
-    
-    $(".shopping-list").append(resultsElements);
-    
+    //write completely without jquery (in this case you don't need "$(function)......")
+    /*
+    document.addEventListener('click', function() {
+      if (this.matches('.shopping-item-delete') {
+        this.closest("li").remove();
+      }
+    });
+    */
 
-
-   
+    //Check items
+    $(document).on('click', '.shopping-item-toggle', function() {
+      $(this).closest('li').find('.shopping-item').toggleClass('shopping-item__checked');
+    });
 
   });
 
